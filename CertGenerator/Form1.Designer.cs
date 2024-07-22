@@ -29,17 +29,22 @@
         private void InitializeComponent()
         {
             this.Btn_Generate = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // Btn_Generate
             // 
-            this.Btn_Generate.Location = new System.Drawing.Point(293, 146);
+            this.Btn_Generate.Location = new System.Drawing.Point(307, 181);
             this.Btn_Generate.Name = "Btn_Generate";
             this.Btn_Generate.Size = new System.Drawing.Size(75, 23);
             this.Btn_Generate.TabIndex = 0;
             this.Btn_Generate.Text = "Generate";
             this.Btn_Generate.UseVisualStyleBackColor = true;
             this.Btn_Generate.Click += new System.EventHandler(this.Btn_Generate_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -48,7 +53,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.Btn_Generate);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Certificate Generator";
             this.ResumeLayout(false);
 
         }
@@ -56,6 +61,7 @@
         #endregion
 
         private System.Windows.Forms.Button Btn_Generate;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
