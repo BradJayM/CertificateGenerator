@@ -30,6 +30,7 @@
         {
             this.Btn_Generate = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // Btn_Generate
@@ -45,6 +46,10 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.Description = "Please choose a folder to save the complted certificates in.";
             // 
             // Form1
             // 
@@ -62,6 +67,7 @@
 
         private System.Windows.Forms.Button Btn_Generate;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

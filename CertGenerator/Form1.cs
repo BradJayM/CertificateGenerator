@@ -26,6 +26,7 @@ namespace CertGenerator
         string inputFile;
         static string fileName = "MASTERCert.docx";
         string MasterCert = Path.Combine(Environment.CurrentDirectory, fileName);
+        string savePathPartOne;
 
         private void Btn_Generate_Click(object sender, EventArgs e)
         {
@@ -33,6 +34,7 @@ namespace CertGenerator
             openFileDialog1.FileName = "";
             openFileDialog1.Filter = "Excel File|*.xlsx;*.xls;*.csv";
 
+            
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 inputFile = openFileDialog1.FileName;
@@ -45,10 +47,11 @@ namespace CertGenerator
                 {
                     //readExcel(inputFile);
                     var GradFrame = makeDataFrame(inputFile);
+                    ChooseFolder();
                     fillCert(GradFrame);
-                    
                 }
             }
+           
         }
 
         private DataFrame makeDataFrame(string InFile)
@@ -90,7 +93,7 @@ namespace CertGenerator
                    }
                 }
                 string savePath = (Graduates[i, 1].ToString() + "-" + Graduates[i, 2].ToString());
-                newDocument.SaveAs(@"D:\%name%".Replace("%name%", savePath));
+                newDocument.SaveAs(Path.Combine(savePathPartOne,"%name%".Replace("%name%", savePath)));
                 newDocument.Close();
             }
             
@@ -112,5 +115,12 @@ namespace CertGenerator
             findObject.Execute(Replace: WdReplace.wdReplaceAll);
         }
 
+        public void ChooseFolder()
+        {
+            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                savePathPartOne = folderBrowserDialog1.SelectedPath;
+            }
+        }
     }
 }
