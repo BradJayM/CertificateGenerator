@@ -21,12 +21,17 @@ namespace CertGenerator
         public Form1()
         {
             InitializeComponent();
+            MessageBox.Show(Path.Combine(Environment.CurrentDirectory, fileName));
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
         }
-
+        static string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
         string inputFile;
         static string fileName = "MASTERCert.docx";
-        string MasterCert = Path.Combine(Environment.CurrentDirectory, fileName);
+        string MasterCert = ("MASTERCert.docx");
         string savePathPartOne;
+        string filePath = Path.Combine(baseDirectory, fileName);
+
+
 
         private void Btn_Generate_Click(object sender, EventArgs e)
         {
@@ -68,7 +73,7 @@ namespace CertGenerator
         private void fillCert(DataFrame Graduates)
         {
             var app = new Microsoft.Office.Interop.Word.Application();
-            var sourceDoc = app.Documents.Open(MasterCert);
+            var sourceDoc = app.Documents.Open(filePath);
 
             sourceDoc.ActiveWindow.Selection.WholeStory();
             sourceDoc.ActiveWindow.Selection.Copy();

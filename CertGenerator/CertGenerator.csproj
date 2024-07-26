@@ -28,6 +28,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -73,6 +75,9 @@
     <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.0.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>packages\DocumentFormat.OpenXml.Framework.3.0.2\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="HarfBuzzSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\HarfBuzzSharp.2.6.1.5\lib\net462\HarfBuzzSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Data.Analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Data.Analysis.0.21.1\lib\netstandard2.0\Microsoft.Data.Analysis.dll</HintPath>
     </Reference>
@@ -82,6 +87,9 @@
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Office.Interop.Word.15.0.4797.1004\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Spire.Doc, Version=12.7.3.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>packages\Spire.Doc.12.7.3\lib\net48\Spire.Doc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -139,6 +147,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="CertGenerator_TemporaryKey.pfx" />
+    <Content Include="MASTERCert.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -198,4 +209,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\HarfBuzzSharp.2.6.1.5\build\net462\HarfBuzzSharp.targets" Condition="Exists('packages\HarfBuzzSharp.2.6.1.5\build\net462\HarfBuzzSharp.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\HarfBuzzSharp.2.6.1.5\build\net462\HarfBuzzSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\HarfBuzzSharp.2.6.1.5\build\net462\HarfBuzzSharp.targets'))" />
+  </Target>
 </Project>
