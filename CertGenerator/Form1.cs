@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using Word = Microsoft.Office.Interop.Word;
 using Microsoft.Data.Analysis;
+using System.IO;
+using Microsoft.Office.Interop.Word;
 
 namespace CertGenerator
 {
@@ -22,7 +24,8 @@ namespace CertGenerator
         }
 
         string inputFile;
-        string MasterCert = "C://Users//bradj//OneDrive//Desktop//MASTERCert.docx";
+        static string fileName = "MASTERCert.docx";
+        string MasterCert = Path.Combine(Environment.CurrentDirectory, fileName);
 
         private void Btn_Generate_Click(object sender, EventArgs e)
         {
@@ -65,16 +68,48 @@ namespace CertGenerator
             var sourceDoc = app.Documents.Open(MasterCert);
 
             sourceDoc.ActiveWindow.Selection.WholeStory();
-            sourceDoc.ActiveWindow.Selection.CopyFormat();
+            sourceDoc.ActiveWindow.Selection.Copy();
 
-            var newDocument = new Microsoft.Office.Interop.Word.Document();
-            newDocument.ActiveWindow.Selection.PasteFormat();
-            newDocument.SaveAs(@"D:\test1.docx");
+
+
+            for (int i = 0; i < Graduates.Rows.Count; i++)
+            {
+                var newDocument = new Microsoft.Office.Interop.Word.Document();
+                newDocument.ActiveWindow.Selection.PasteAndFormat(default);
+                ReplaceText(newDocument.Content, "$[NAME]", Graduates[i, 1].ToString());
+                ReplaceText(newDocument.Content, "$[COURSE]", Graduates[i,2].ToString());
+                ReplaceText(newDocument.Content, "$[COMPLETION]", Graduates[i,3].ToString());
+                ReplaceText(newDocument.Content, "$[SIGNATORY]", Graduates[i,4].ToString());
+
+                foreach(Section section in newDocument.Sections)
+                {
+                    foreach(HeaderFooter footer in section.Footers)
+                    {
+                       ReplaceText(footer.Range, "$[CERT#]", Graduates[i, 0].ToString());
+                       ReplaceText(footer.Range, "$[VALIDEND]", Graduates[i,5].ToString());
+                   }
+                }
+                string savePath = (Graduates[i, 1].ToString() + "-" + Graduates[i, 2].ToString());
+                newDocument.SaveAs(@"D:\%name%".Replace("%name%", savePath));
+                newDocument.Close();
+            }
+            
 
             sourceDoc.Close();
-            newDocument.Close();
+            
 
             app.Quit();
+        }
+
+        static void ReplaceText(Range range, string findText, string replaceText)
+        {
+            Find findObject = range.Find;
+            findObject.ClearFormatting();
+            findObject.Text = findText;
+            findObject.Replacement.ClearFormatting();
+            findObject.Replacement.Text = replaceText;
+
+            findObject.Execute(Replace: WdReplace.wdReplaceAll);
         }
 
     }
