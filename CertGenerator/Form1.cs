@@ -60,7 +60,7 @@ namespace CertGenerator
             var Quals = dataFrame.Rows;
 
             foreach (DataFrameRow r in Quals){  // To Test Dataframe outputs
-                MessageBox.Show(r.ToString());
+                //MessageBox.Show(r.ToString());
             }
             return dataFrame;
         }   
@@ -121,6 +121,11 @@ namespace CertGenerator
             {
                 savePathPartOne = folderBrowserDialog1.SelectedPath;
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

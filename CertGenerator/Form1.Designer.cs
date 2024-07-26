@@ -35,9 +35,9 @@
             // 
             // Btn_Generate
             // 
-            this.Btn_Generate.Location = new System.Drawing.Point(307, 181);
+            this.Btn_Generate.Location = new System.Drawing.Point(2, 12);
             this.Btn_Generate.Name = "Btn_Generate";
-            this.Btn_Generate.Size = new System.Drawing.Size(75, 23);
+            this.Btn_Generate.Size = new System.Drawing.Size(293, 73);
             this.Btn_Generate.TabIndex = 0;
             this.Btn_Generate.Text = "Generate";
             this.Btn_Generate.UseVisualStyleBackColor = true;
@@ -55,10 +55,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(297, 97);
             this.Controls.Add(this.Btn_Generate);
             this.Name = "Form1";
             this.Text = "Certificate Generator";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
